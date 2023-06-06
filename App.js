@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,11 +23,8 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
-function App(): JSX.Element {
+function App() {
 
     const [task, setTask] = useState();
     const [taskItems, setTaskItems] = useState([]);
@@ -37,8 +33,8 @@ function App(): JSX.Element {
 
     const handleAddTask = () => {
     Keyboard.dismiss();
-    setTaskItems([...taskItems, task])
-    setTask(null)
+      setTaskItems([...taskItems, task])
+      setTask(null)
     }
 
     const completeTask = (index) => {
@@ -63,7 +59,7 @@ function App(): JSX.Element {
         {taskItems.length <= 0 ?
         <Text style={styles.noTask}> No task available</Text>
         :  taskItems.map((item, index) => {
-                   return <TouchableOpacity  onPress={() => completeTask(index)}>
+                   return <TouchableOpacity key={index} onPress={() => completeTask(index)}>
                    <Task index={index} text={item}/>
                    </TouchableOpacity>
                   })
